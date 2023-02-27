@@ -91,6 +91,11 @@ public:
     string timeField;
     int downsampleRate;
 
+    // RGB
+    int historyCloudSize;                        //20 搜索局部地图时保留多少帧历史点云关键帧
+    float RGBVoxelSize;                          //0.05 总的RGB点云输出将采用体素大小
+    float maxDistRGB;                            //30.0 投影渲染时点的最大距离
+
     // IMU
     float imuAccNoise;
     float imuGyrNoise;
@@ -172,6 +177,10 @@ public:
 
         nh.param<bool>(PROJECT_NAME + "/savePCD", savePCD, false);
         nh.param<std::string>(PROJECT_NAME + "/savePCDDirectory", savePCDDirectory, "/tmp/loam/");
+
+        nh.param<int>(PROJECT_NAME + "/historyCloudSize", historyCloudSize, 20);
+        nh.param<float>(PROJECT_NAME + "/RGBVoxelSize", RGBVoxelSize, 0.05);
+        nh.param<float>(PROJECT_NAME + "/maxDistRGB", maxDistRGB, 30.0);
 
         nh.param<int>(PROJECT_NAME + "/N_SCAN", N_SCAN, 16);
         nh.param<int>(PROJECT_NAME + "/Horizon_SCAN", Horizon_SCAN, 1800);
